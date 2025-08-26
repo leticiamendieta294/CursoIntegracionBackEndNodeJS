@@ -44,3 +44,44 @@ export const deleteUser = async (req: Request, res: Response, next: NextFunction
 };
 
 
+// filtrado 
+
+export const filterUser = async (req: Request, res: Response) => {
+
+    const {nombre} = req.params;
+
+    const listadoUser = await prisma.user.findMany({
+        where: {
+            name : {
+                contains : nombre
+            }
+        }
+    })
+res.json(listadoUser);
+
+}
+
+//orderBy
+
+export const ordenUser = async (req: Request, res: Response) => {
+
+    const listadoUserOrdenado = await prisma.user.findMany({
+        orderBy:{
+            name : "desc"
+        }
+    })
+
+    res.json(listadoUserOrdenado);
+}
+
+// paginacion 
+export const paginacionUser = async (req: Request, res: Response) => {
+
+    const listapaginada = await prisma.user.findMany({
+        skip : 2,
+        take: 3
+    })
+
+    res.json(listapaginada);
+}
+

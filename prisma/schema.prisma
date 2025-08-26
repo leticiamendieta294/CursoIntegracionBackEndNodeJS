@@ -14,9 +14,23 @@ datasource db {
 }
 
 model User {
- id Int @id @default(autoincrement())
- name String
- email String @unique
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+
+  //1:N hacia Reserva
+
+  reserva Reserva[]
+
 }
+
+model Reserva {
+ id Int @id @default(autoincrement())
+ fecha DateTime @default(now()) //now significa que obtendra la fecha y hora actual.
+ //tabla referenciada
+ user User @relation(fields: [userId], references: [id]) //aqui en donde establece la relacion 
+ userId Int
+}
+
 
 
