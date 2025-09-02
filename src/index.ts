@@ -3,6 +3,8 @@ import { logger } from "./middlewares/logger";
 import userRoutes from "./routes/user.routes";
 import { errorHandler } from "./middlewares/errorHandler";
 import reservasRoutes from "./routes/reservas.routes";
+import cors from "cors";
+import loginRoutes from "./routes/login.routes";
 
 
 const app = express();
@@ -10,8 +12,10 @@ const app = express();
 
 app.use(express.json());
 app.use(logger);
+app.use(cors());
 app.use('/api', userRoutes);
 app.use('/api', reservasRoutes);
+app.use('/api', loginRoutes);
 app.use(errorHandler);
 
 

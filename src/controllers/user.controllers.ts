@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 //traer la lista de usuarios
@@ -8,11 +9,12 @@ export const getUsers = async (req: Request, res: Response) => {
  res.json(users);
 };
 
-// insertar o crear el usuario
+// insertar o crear el usuario aqui es donde se hashed password 
 export const createUser = async (req: Request, res: Response, next: NextFunction) => {
  try {
- const { name, email } = req.body;
- const user = await prisma.user.create({ data: { name, email } }); // sinonimo del insert into user.....
+ const { name, email, password } = req.body;
+ const hashPassword = await bcrypt.hash(password,10)
+ const user = await prisma.user.create({ data: { name, email, password : hashPassword } }); // sinonimo del insert into user.....
  res.json(user);
  } catch (error) {
  next(error);
@@ -84,4 +86,3 @@ export const paginacionUser = async (req: Request, res: Response) => {
 
     res.json(listapaginada);
 }
-
