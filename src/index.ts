@@ -5,6 +5,8 @@ import { errorHandler } from "./middlewares/errorHandler";
 import reservasRoutes from "./routes/reservas.routes";
 import cors from "cors";
 import loginRoutes from "./routes/login.routes";
+import weatherRoutes from "./routes/weather.routes";
+
 
 
 const app = express();
@@ -16,6 +18,8 @@ app.use(cors());
 app.use('/api', userRoutes);
 app.use('/api', reservasRoutes);
 app.use('/api', loginRoutes);
+app.use('/api', weatherRoutes);
+
 app.use(errorHandler);
 
 
