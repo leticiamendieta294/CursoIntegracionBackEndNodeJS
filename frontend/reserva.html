@@ -64,7 +64,7 @@
         
 
 //Me falto la ¨h¨ de Authorization, por eso el error de ayer :)
-        const respuesta = await fetch(`http://localhost:3000/api/clima?city=${city}&date=${date}`, {
+        const respuesta = await fetch(`https://cursointegracionbackendnodejs.onrender.com/api/clima?city=${city}&date=${date}`, {
             headers : { Authorization : `Bearer ${token}`}
         });
 
